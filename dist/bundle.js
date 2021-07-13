@@ -246,13 +246,11 @@ axios.get('https://geo.ipify.org/api/v1?apiKey=at_PFVk7CGvwYF7tQ1do6CCqLZQEeBYZ&
 function getData() {
     let getIP = document.querySelector('.inputIP').value;
     let searchValue = getIP.trim();
-    console.log(searchValue);
 
     customMarker = "";
 
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(searchValue)) {
         axios.get(`https://geo.ipify.org/api/v1?apiKey=at_PFVk7CGvwYF7tQ1do6CCqLZQEeBYZ&ipAddress=${getIP}`).then(response => {
-            console.log(response.data);
             ipAddress.innerHTML = response.data.ip;
             location.innerHTML = `${response.data.location.city}, ${response.data.location.region} ${response.data.location.postalCode}`
             timezone.innerHTML = response.data.location.timezone;

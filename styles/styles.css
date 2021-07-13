@@ -150,7 +150,7 @@ header .search i:hover {
 
 @media only screen and (max-width: 700px) {
   .ip-info {
-    top: 200px;
+    top: 180px;
     width: 80%;
     text-align: center;
     -ms-grid-columns: 1fr;
@@ -172,6 +172,7 @@ header .search i:hover {
   }
   header h1 {
     font-size: 1.5rem;
+    margin-bottom: 0.75rem;
   }
   header .search {
     width: 78%;
