@@ -49,6 +49,7 @@ header{
             border-radius: 0 1rem 1rem 0;
             background-color: black;
             padding: 1rem 1.5rem;
+            cursor: pointer;
         }
     }
 }
@@ -60,7 +61,7 @@ header{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     text-align: left;
-    width: 80%;
+    width: 60%;
     left:0;
     right:0;
     margin-left:auto;
@@ -68,14 +69,20 @@ header{
 
     background-color: #fff;
     border-radius: 0.5rem;
-    padding: 3rem;
+    padding: 2rem;
+    .grid{
+        border-right: 1px solid gray;
+        padding: 0 0.75rem;
 
+        &:nth-child(4){
+            border-right: none;
+        }
+    }
     h2{
         text-transform: uppercase;
         color: hsl(0, 0%, 59%);        
         font-weight: 600;
         font-size: 0.75rem;
-        margin-top: -1rem;
         margin-bottom: 0.5rem;
         letter-spacing: 0.15rem;
     }
@@ -83,7 +90,6 @@ header{
         font-size: 1.5rem;
         font-weight: 600;
         color: hsl(0, 0%, 17%);
-        max-width: 10ch;
     }
 }
 #mapid { 

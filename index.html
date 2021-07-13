@@ -17,32 +17,32 @@
     <header>
       <h1>IP Address Tracker</h1>
       <div class="search">
-        <input type="text" placeholder="Search for any IP address or domain">
-        <i><img src="./images/icon-arrow.svg" alt=""></i>
+        <input class="inputIP" type="text" placeholder="Search for any IP address or domain">
+        <i id="search"><img src="./images/icon-arrow.svg" alt=""></i>
       </div>
     </header>
     <div class="ip-info">
       <div class="grid address">
         <h2>IP Address</h2>
-        <h1>192.212.174.101</h1>
+        <h1 id="ipAddress"></h1>
       </div>
       <div class="grid location">
         <h2>Location</h2>
-        <h1>Brooklyn, NY 10001</h1>
+        <h1 id="location"></h1>
       </div>
       <div class="grid timezone">
         <h2>Timezone</h2>
-        <h1>UTC -05:00</h1>
+        <h1 id="timezone"></h1>
       </div>
       <div class="grid isp">
         <h2>ISP</h2>
-        <h1>SpaceX Starlink</h1>
+        <h1 id="isp"></h1>
       </div>
     </div>
     <div id="mapid"></div>
   </div>
 
-  <script src="./js/main.js"></script>
+  <script src="./dist/bundle.js"></script>
 </body>
 
 </html>
