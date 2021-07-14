@@ -279,7 +279,6 @@ function getData() {
     } else {
         alert("Please enter a valid IP Address or Domain");
     }
-
 }
 
 getBtn.addEventListener('click', getData);
