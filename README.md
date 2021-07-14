@@ -37,7 +37,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: https://www.frontendmentor.io/solutions/html-scss-axios-leafletjs-IuRE_z6p-
 - Live Site URL: https://janssenhidal.github.io/IP-Tracker/
 
 ## My process
