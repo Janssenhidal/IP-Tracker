@@ -186,13 +186,14 @@ process.umask = function() { return 0; };
 
 },{}],2:[function(require,module,exports){
 const getBtn = document.getElementById('search');
+const axios = require('axios');
+
 let ipAddress = document.getElementById('ipAddress');
 let location = document.getElementById('location');
 let timezone = document.getElementById('timezone');
 let isp = document.getElementById('isp');
-const axios = require('axios');
 
-// ---- Creation of the map ---
+// ---- Creation of the map ----
 
 let mapURL = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
 
@@ -207,15 +208,17 @@ let map = L.map('mapid', {
     layers: [streets]
 }).setView([0, 0], 2);
 
-// Setting the icon for the marker
-
-let customMarker;
-
 let blackLocationMarker = L.icon({
     iconUrl: 'images/icon-location.svg',
     iconSize: [36, 46],
     iconAnchor: [12, 54],
 });
+
+//Create markerGroup inside layerGroup to make it easier to control the markers
+let markerGroup = L.layerGroup().addTo(map);
+
+//Set the map options for MAX zoom and MIN zoom
+map.options.maxZoom = 15; map.options.minZoom = 3;
 
 // Add the base maps as layers
 
@@ -237,17 +240,28 @@ axios.get('https://geo.ipify.org/api/v1?apiKey=at_PFVk7CGvwYF7tQ1do6CCqLZQEeBYZ&
     isp.innerHTML = response.data.isp;
 
     //SET MAP VIEW AND MARKER TO COORDS
+
     map.setView([response.data.location.lat, response.data.location.lng], 11);
-    var customMarker = new L.Marker([response.data.location.lat, response.data.location.lng], { icon: blackLocationMarker });
-    customMarker.addTo(map);
+    let customMarker = new L.Marker([response.data.location.lat, response.data.location.lng], { icon: blackLocationMarker });
+    customMarker.addTo(markerGroup);
+}).catch(error => {
+    console.log(error);
 });
 
-//Function run when search button pressed
+
+//If ENTER button is pressed call getData function
+let getIP = document.querySelector('.inputIP').addEventListener("keyup", (event) => {
+    if (event.keyCode === 13) {
+        getData();
+    }
+});
+
+//Function run when search button is clicked
 function getData() {
-    let getIP = document.querySelector('.inputIP').value;
+    getIP = document.querySelector('.inputIP').value;
     let searchValue = getIP.trim();
 
-    customMarker = "";
+    markerGroup.clearLayers()
 
     if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(searchValue)) {
         axios.get(`https://geo.ipify.org/api/v1?apiKey=at_PFVk7CGvwYF7tQ1do6CCqLZQEeBYZ&ipAddress=${getIP}`).then(response => {
@@ -257,11 +271,13 @@ function getData() {
             isp.innerHTML = response.data.isp;
 
             map.setView([response.data.location.lat, response.data.location.lng], 11);
-            var customMarker = new L.Marker([response.data.location.lat, response.data.location.lng], { icon: blackLocationMarker });
-            customMarker.addTo(map);
+            let customMarker = new L.Marker([response.data.location.lat, response.data.location.lng], { icon: blackLocationMarker });
+            customMarker.addTo(markerGroup);
+        }).catch(error => {
+            console.log(error);
         });
     } else {
-        alert("Please enter a valid IP Address or Domain")
+        alert("Please enter a valid IP Address or Domain");
     }
 
 }
