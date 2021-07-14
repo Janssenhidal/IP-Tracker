@@ -93,7 +93,7 @@ header .search i:hover {
   -ms-grid-columns: 1fr 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr 1fr;
   text-align: left;
-  width: 60%;
+  width: 70%;
   left: 0;
   right: 0;
   margin-left: auto;
